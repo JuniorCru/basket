@@ -5,16 +5,18 @@ if [ -z "$VAGRANT_VER" ]; then
 fi
 
 vagrant__install() {
-	basket__pushd ${BASKET__PATH_TEMP}
-		if using_apt; then
+	if using_apt; then
+		basket__pushd ${BASKET__PATH_TEMP}
 			basket__wget https://dl.bintray.com/mitchellh/vagrant/vagrant_${VAGRANT_VER}.deb
 			with_sudo dpkg -i vagrant_${VAGRANT_VER}.deb
-		elif using_yum; then
+		basket__popd
+	elif using_yum; then
+		basket__pushd ${BASKET__PATH_TEMP}
 			# :TODO: check dependencies
 			basket__wget https://dl.bintray.com/mitchellh/vagrant/vagrant_${VAGRANT_VER}.rpm
 			with_sudo rpm -Uvh vagrant_${VAGRANT_VER}.rpm
-		else
-			await_input "Vagrant installation is currently only available for Debian and Redhat based systems, sorry!"
-		fi
-	basket__popd
+		basket__popd
+	else
+		await_input "Vagrant installation is currently only available for Debian and Redhat based systems, sorry!"
+	fi
 }
