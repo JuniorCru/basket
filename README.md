@@ -81,3 +81,9 @@ Basket only requires a temporary folder for downloading files somewhere and does
     - install / uninstall desktop application (gnome3, unity)
 - cleanup:
     - put nodejs manual installation to the correct location
+
+
+
+## License
+
+Released under the MIT License. See the bundled `LICENSE` file for details.
